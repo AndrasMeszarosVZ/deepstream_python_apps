@@ -185,10 +185,12 @@ def main(args):
         if not sink:
             sys.stderr.write(" Unable to create nv3dsink \n")
     else:
-        print("Creating EGLSink \n")
-        sink = Gst.ElementFactory.make("nveglglessink", "nvvideo-renderer")
+        print("Creating filesink \n")
+        #todo revwrite here
+        sink = Gst.ElementFactory.make("filesink", "filesink")
+        sink.set_property("location", "output.mp4")
         if not sink:
-            sys.stderr.write(" Unable to create egl sink \n")
+            sys.stderr.write(" Unable to create file sink \n")
 
     print("Playing file %s " %args[1])
     source.set_property('location', args[1])
